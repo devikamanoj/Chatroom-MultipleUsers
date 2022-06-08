@@ -11,7 +11,11 @@ if len(sys.argv) !=2:
 else:
     server_connection = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     server_connection.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    server_connection.connect((sys.argv[1], pychat_util.PORT))
+    try:
+        server_connection.connect((sys.argv[1], pychat_util.PORT))
+    except:
+        print(colored("Server down!","red"))
+        sys.exit(2)
 
 def prompt():
     print('> ', end=' ', flush = True)
